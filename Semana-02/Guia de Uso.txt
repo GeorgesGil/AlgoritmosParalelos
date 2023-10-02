@@ -1,0 +1,11 @@
+Se debe instalar Nodejs en caso de no tenerlo instalado.
+
+una vez hecho esto se abre la raiz de la carpeta metodosOrdenamiento en cmd.
+
+se ejecuta el comando "npm install" para instalar las dependencias de nodejs.
+
+y por ultimo se ejecuta "npm run dev" para poder entrar a la pagina web, en la direccion que este comando nos dice.
+
+
+
+Georges Gil 1-18-2363
