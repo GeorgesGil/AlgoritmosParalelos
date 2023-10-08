@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Encabezado similar a guardar.html -->
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Actualizar Producto</h1>
+        <form action="/actualizar" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+            <input type="hidden" name="id" value="{{.id}}">
+            <div class="form-group">
+                <label for="nombre">Nombre del Producto</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="cantidad">Cantidad</label>
+                <input type="number" class="form-control" id="cantidad" name="cantidad" required>
+            </div>
+            <div class="form-group">
+                <label for="precio">Precio</label>
+                <input type="number" class="form-control" id="precio" name="precio" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Actualizar Producto</button>
+        </form>
+    </div>
+    <!-- Scripts similares a guardar.html -->
+</body>
+</html>
