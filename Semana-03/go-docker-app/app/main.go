@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
@@ -19,7 +20,9 @@ type Producto struct {
 }
 
 func initDB() *sql.DB {
-	connStr := "user=georgesgil password=1182363 dbname=georgesgil sslmode=disable host=postgres port=5432"
+	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+		os.Getenv("DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"))
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		panic(err)
@@ -34,9 +37,6 @@ func initDB() *sql.DB {
             precio INT NOT NULL
         );
     `)
-	if err != nil {
-		panic(err)
-	}
 
 	return db
 }
@@ -46,6 +46,7 @@ func main() {
 	defer db.Close()
 
 	r := gin.Default()
+	port := os.Getenv("PORT")
 
 	r.LoadHTMLGlob("templates/*.html") // Cargar plantillas HTML desde la carpeta templates
 
@@ -102,7 +103,7 @@ func main() {
 		var producto Producto
 		err := db.QueryRow("SELECT * FROM productos WHERE id = $1", id).Scan(&producto.ID, &producto.Nombre, &producto.Cantidad, &producto.Precio)
 		if err != nil {
-			// Manejar el error, por ejemplo, redirigir a una página de error
+
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
@@ -117,7 +118,6 @@ func main() {
 	})
 	r.POST("/actualizar", func(c *gin.Context) {
 		id := c.PostForm("id")
-		// Obtén los datos del formulario y verifica que sean correctos
 		var producto Producto
 
 		if err := c.ShouldBind(&producto); err != nil {
@@ -126,7 +126,6 @@ func main() {
 		}
 		fmt.Println("Datos del producto recibidos:", producto)
 
-		// Realiza la actualización en la base de datos
 		_, err := db.Exec("UPDATE productos SET nombre=$1, cantidad=$2, precio=$3 WHERE id=$4",
 			producto.Nombre, producto.Cantidad, producto.Precio, id)
 		if err != nil {
@@ -148,5 +147,5 @@ func main() {
 		c.Redirect(http.StatusFound, "/")
 	})
 
-	r.Run(":8000")
+	r.Run(fmt.Sprintf(":%s", port))
 }

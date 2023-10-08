@@ -16,12 +16,19 @@ services:
       POSTGRES_PASSWORD: 1182363
       POSTGRES_DB: georgesgil
     ports:
-      - "5432:5433"  # Map external port 5432 to internal port 5433 in the container
+      - "5432:5433"
 
   app:
     build:
       context: ./app
     ports:
       - "8000:8000"
+    environment:
+      - PORT=8000 
+      - DB_HOST=postgres
+      - DB_USER=georgesgil
+      - DB_PASSWORD=1182363
+      - DB_NAME=georgesgil
+      - DB_PORT=5432
     depends_on:
       - postgres
