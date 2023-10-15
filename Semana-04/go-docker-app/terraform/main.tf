@@ -41,8 +41,6 @@ resource "digitalocean_droplet" "web" {
       "sudo ufw allow 5432",
       "sudo ufw allow 5433",
       "sudo ufw allow 8000",
-      "echo '${file("${path.module}/file/private.key")}' > AlgoritmosParalelos/Semana-04/go-docker-app/nginx-app/nginx/private.key",
-      "echo '${file("${path.module}/file/certificate.pem")}' > AlgoritmosParalelos/Semana-04/go-docker-app/nginx-app/nginx/certificate.pem"
     ]
 
 
