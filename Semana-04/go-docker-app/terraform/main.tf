@@ -9,7 +9,7 @@ terraform {
 provider "digitalocean" {
   token = var.token
 }
-resource "digitalocean_droplet" "server1" {
+resource "digitalocean_droplet" "web" {
   image    = "docker-20-04"
   name     = "server1"
   region   = "nyc3"
@@ -50,7 +50,7 @@ resource "digitalocean_droplet" "server1" {
 
 }
 
-resource "digitalocean_droplet" "server2" {
+resource "digitalocean_droplet" "web2" {
   image    = "docker-20-04"
   name     = "server2"
   region   = "nyc3"
