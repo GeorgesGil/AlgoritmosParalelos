@@ -30,8 +30,7 @@ resource "digitalocean_droplet" "web2" {
   }
 
   provisioner "remote-exec" {
-   provisioner "remote-exec" {
-  inline = [
+    inline = [
     "sudo apt-get update",
     "sudo apt install -y git",
     "git clone https://github.com/GeorgesGil/AlgoritmosParalelos.git",
@@ -57,9 +56,6 @@ resource "digitalocean_droplet" "web2" {
   ]
 }
 
-
-
-  }
 
 
 
