@@ -21,9 +21,12 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
-      - DB_PORT=5432
-    
+      - DB_PORT=5432 
+    networks:
+      - mynetwork
 
+      
 networks:
-  default:
+  mynetwork:
     external: true
+
