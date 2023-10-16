@@ -29,13 +29,8 @@ resource "digitalocean_droplet" "web2" {
     timeout     = "2m"
   }
 
-<<<<<<< HEAD
-provisioner "remote-exec" {
-  inline = [
-=======
   provisioner "remote-exec" {
     inline = [
->>>>>>> 4b59c4315e807582a0f8bc79dac7c2a522290cd9
     "sudo apt-get update",
     "sudo apt install -y git",
     "git clone https://github.com/GeorgesGil/AlgoritmosParalelos.git",
@@ -60,12 +55,6 @@ provisioner "remote-exec" {
     "sudo ufw allow 8000"
   ]
 }
-
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 4b59c4315e807582a0f8bc79dac7c2a522290cd9
 
 
 }
