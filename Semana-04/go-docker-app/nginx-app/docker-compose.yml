@@ -22,10 +22,8 @@ services:
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
       - DB_PORT=5432
-    depends_on:
-      - postgres
+    
 
 networks:
   default:
-    external:
-      name: my-network
+    external: true
